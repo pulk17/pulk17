@@ -2,6 +2,7 @@ import requests
 import json
 import sys
 from datetime import datetime
+import os
 
 username = sys.argv[1]
 
@@ -14,7 +15,6 @@ data = r.json()
 if "submissionCalendar" not in data:
     raise Exception("Unable to fetch LC activity. Username may be wrong.")
 
-# submissionCalendar is a dict: timestamp → count
 calendar = data["submissionCalendar"]
 
 # Convert to snake generator format
@@ -26,9 +26,12 @@ for ts, count in calendar.items():
         "count": count
     })
 
-# Save to file
+# 🔥 Ensure "data/" directory exists
+os.makedirs("data", exist_ok=True)
+
+# Save file
 output = {
-    "activity": grid, 
+    "activity": grid,
     "total_days": len(grid)
 }
 
