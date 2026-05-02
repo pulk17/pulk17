@@ -31,7 +31,7 @@
 
 I'm **Pulkit** — a 3rd-year CS undergrad at **UPES Dehradun** (DevOps specialization, CGPA 8.41), building toward quant development and high-performance systems engineering.
 
-- 🏆 **Codeforces Expert** (~1660 rating) · **LeetCode Knight**
+- 🏆 **Codeforces Expert** (~1700 rating) · **LeetCode Knight**
 - ⚙️ Currently building a **low-latency NASDAQ ITCH 5.0 order book engine** in C++ with real-time analytics dashboard
 - 🔬 Interests: low-latency systems, market microstructure, full-stack infrastructure
 - 📍 Dehradun, India · Graduating May 2027
@@ -149,7 +149,7 @@ Terminal-based security operations toolkit. Automates common DevSecOps workflows
 <td align="center" valign="middle">
 
 **Codeforces**<br/><br/>
-<img src="https://img.shields.io/badge/Expert-1660_Rating-1F8ACB?style=for-the-badge&logo=codeforces"/>
+<img src="https://img.shields.io/badge/Expert-1700_Rating-1F8ACB?style=for-the-badge&logo=codeforces"/>
 <br/><br/>
 <a href="https://codeforces.com/profile/pulk17">
   <img src="https://img.shields.io/badge/View_Profile-→-38bdae?style=for-the-badge"/>
