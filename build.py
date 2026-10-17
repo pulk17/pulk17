@@ -133,12 +133,12 @@ def ref_bubble(svg, cx, cy, r, letter, size):
 
 # --------------------------------------------------------------------------- hero
 HERO_ROWS = [
-    # letter, raw input sample, system, output, measured figure
-    ("A", "A  AAPL  B  100  145.64", "PitchFork", "every stock's order book", "459.8M messages in 51.6 s"),
-    ("B", "POST /runs/{id}/restart", "sample-platform", "CCExtractor's CI API", "79 operations, 330+ tests"),
-    ("C", "kind: Deployment", "k8n", "an editable cluster graph", "9 MCP tools, dry-run first"),
-    ("D", "vote { target: 4 }", "Undercover", "one cheat-proof game state", "Socket.IO and Redis"),
-    ("E", None, "Band-Former", "a playable guitar tab", "PyTorch stages, C++ solver"),
+    # letter, raw input sample, system, output, headline figure
+    ("A", "A  AAPL  B  100  145.64", "PitchFork", "every stock's live orders", "460M updates in under a minute"),
+    ("B", "POST /runs/{id}/restart", "sample-platform", "CCExtractor's test platform", "34 changes merged, 330+ tests"),
+    ("C", "kind: Deployment", "k8n", "cloud apps you can draw", "AI helpers you approve"),
+    ("D", "vote { target: 4 }", "Undercover", "a live party game", "real-time and cheat-proof"),
+    ("E", None, "Band-Former", "guitar tabs from any song", "AI plus a fast C++ engine"),
 ]
 TITLE_BLOCK = [
     ("School", ["UPES Dehradun, B.Tech CS", "Graduating May 2027"]),
@@ -152,12 +152,11 @@ TITLE_BLOCK = [
 
 def hero(theme):
     W, H = 960, 520
-    alt = ("Pulkit Chauhan. Final-year CS student who builds fast, tested systems in C++, Go, Python and TypeScript. "
-           "Diagram of five systems he built: PitchFork turns the raw NASDAQ feed into every stock's order book "
-           "(459.8M messages in 51.6 s); sample-platform is CCExtractor's CI API (79 operations, 330+ tests); "
-           "k8n turns Kubernetes resources into an editable graph (9 MCP tools, dry-run first); Undercover keeps "
-           "one cheat-proof game state over Socket.IO and Redis; Band-Former turns audio into a playable guitar tab. "
-           "UPES Dehradun, graduating May 2027. Google Summer of Code 2026 with CCExtractor, 34 commits merged. "
+    alt = ("Pulkit Chauhan. Final-year CS student who builds fast, well-tested software in C++, Go, Python and TypeScript. "
+           "Five projects: PitchFork rebuilds every stock's live orders from a day of NASDAQ data, about 460 million updates in under a minute; "
+           "sample-platform is CCExtractor's test platform, 34 changes merged and 330+ tests; k8n lets you draw cloud apps, with AI helpers you approve; "
+           "Undercover is a live, cheat-proof party game; Band-Former turns any song into guitar tabs. "
+           "UPES Dehradun, graduating May 2027. Google Summer of Code 2026 with CCExtractor. "
            "Codeforces peak 1986, Candidate Master. LeetCode Knight. AWS Solutions Architect Associate. "
            "Available full-time from January 2027.")
     s = Svg(W, H, "Pulkit Chauhan", alt, theme)
@@ -176,7 +175,7 @@ def hero(theme):
 
     # identity
     s.text(48, 100, "Pulkit Chauhan", "c6", 56, P["line"], ls=-0.6)
-    for i, ln in enumerate(wrap("Final-year CS student. I build fast, tested systems in C++, Go, Python and TypeScript.", "c4", 19, 540)):
+    for i, ln in enumerate(wrap("Final-year CS student. I build fast, well-tested software in C++, Go, Python and TypeScript.", "c4", 19, 540)):
         s.text(49, 138 + i * 25, ln, "c4", 19, P["sub"])
 
     # general arrangement: input -> system -> output
@@ -301,7 +300,7 @@ def sch_api(s, P, H):
         s.text(40, y + 4, r, "m4", 11.5, P["sub"])
         for j in range(len(codes)):
             s.add(f'<rect x="{125 + j * 34}" y="{y - 7}" width="14" height="14" fill="{P["fill"]}" fill-opacity="0.82"/>')
-    s.text(40, 146 + 5 * 24 + 4, "every route, every error path", "c4", 12, P["sub"])
+    s.text(40, 146 + 5 * 24 + 4, "each feature tested, error cases included", "c4", 12, P["sub"])
 
 
 def sch_graph(s, P, H):
@@ -367,35 +366,35 @@ def sch_tab(s, P, H):
 
 
 PROJECTS = [
-    dict(letter="A", title="PitchFork", subtitle="Nobody sends you the market. You rebuild it.",
-         facts=["Replays a full NASDAQ trading day from the raw exchange feed and rebuilds every stock's order book: 459.8M messages in 51.6 s on a laptop.",
-                "Tests an order-flow signal across 6,307 symbols. It calls the next move right 55.28% of the time, yet only 13 symbols stay profitable after paying the spread.",
-                "The same C++ core compiles to a 46 KB WebAssembly module, so a real trading day replays live in your browser."],
+    dict(letter="A", title="PitchFork", subtitle="A stock exchange replay engine",
+         facts=["Takes a full day of real NASDAQ data and rebuilds the live buy and sell orders for every stock: about 460 million updates in under a minute, on a laptop.",
+                "Also runs in the browser, so anyone can watch a real trading day play back live with nothing to install.",
+                "I used it to test a well-known trading signal on 6,300+ stocks and measured exactly how much of it survives real trading costs."],
          chips=["C++17", "WebAssembly", "Linux", "JavaScript"], sch=sch_orderbook,
-         repo="https://github.com/pulk17/NASDAQ-ITCH-OrderBook", live="https://pitchfork.pages.dev/", live_label="Live backtest report"),
-    dict(letter="B", title="sample-platform", subtitle="Google Summer of Code 2026 with CCExtractor",
-         facts=["Built the REST API and web console for the platform that regression-tests CCExtractor, an open-source subtitle extractor, against real video samples.",
-                "34 of my commits are in upstream master: an OpenAPI 3 contract with 79 operations, scoped-token auth, multi-GB uploads and a React 19 console.",
-                "330+ API tests aimed at the edges, like revoked tokens, two uploads with the same name, and the 4xx path of every route."],
+         repo="https://github.com/pulk17/NASDAQ-ITCH-OrderBook", live="https://pitchfork.pages.dev/", live_label="Live demo"),
+    dict(letter="B", title="sample-platform", subtitle="Google Summer of Code 2026, CCExtractor",
+         facts=["Selected for Google's open-source program to build the public API and web dashboard for the system that tests CCExtractor, an open-source subtitle tool.",
+                "34 of my changes were reviewed and merged into the main project by its maintainers.",
+                "Wrote 330+ automated tests so cases like expired logins and duplicate uploads are handled correctly."],
          chips=["Python", "Flask", "MySQL", "React", "TypeScript"], sch=sch_api,
-         repo="https://github.com/CCExtractor/sample-platform", live="https://github.com/CCExtractor/sample-platform/commits/master?author=pulk17", live_label="My merged commits"),
-    dict(letter="C", title="k8n", subtitle="A visual IDE for Kubernetes",
-         facts=["Draw your app as a graph of Kubernetes resources, review the YAML it compiles to, then deploy. Imported resources are patched, never overwritten.",
-                "An MCP server gives Claude Code and other agents 9 cluster tools. Writes are dry-run by default, and a read-only mode drops them entirely.",
-                "A supervisor agent hands work to inspector and architect agents, which diagnose crash loops and OOM kills and propose fixes you approve."],
-         chips=["Go", "Gin", "Next.js", "React Flow", "PostgreSQL", "Helm"], sch=sch_graph,
+         repo="https://github.com/CCExtractor/sample-platform", live="https://github.com/CCExtractor/sample-platform/commits/master?author=pulk17", live_label="My merged work"),
+    dict(letter="C", title="k8n", subtitle="Build and deploy cloud apps by drawing them",
+         facts=["Design an app on a visual canvas and deploy it to Kubernetes without writing configuration files by hand.",
+                "Built-in AI assistants spot common problems and suggest fixes, but nothing changes until you approve it.",
+                "Works with Claude Code, so an AI agent goes through the same safety checks as a person would."],
+         chips=["Go", "Next.js", "Kubernetes", "PostgreSQL"], sch=sch_graph,
          repo="https://github.com/pulk17/k8n", live="https://k8n.pages.dev/", live_label="Live site"),
     dict(letter="D", title="Undercover", subtitle="A real-time multiplayer party game",
-         facts=["Everyone plays from their own phone. The server owns the game state and checks every move, so nobody can cheat by editing their client.",
-                "Game phases run over Socket.IO and sessions live in Redis, so the state never depends on a single server process.",
-                "Installable as a PWA, with request validation, rate limiting and error monitoring built in."],
-         chips=["TypeScript", "React", "Socket.IO", "Redis", "Supabase"], sch=sch_game,
+         facts=["Friends join from their phones and play together live, with no app to install.",
+                "The server runs the game, so no player can cheat by tampering with their own phone.",
+                "Includes error monitoring and protection against spam requests."],
+         chips=["TypeScript", "React", "Socket.IO", "Redis"], sch=sch_game,
          repo="https://github.com/pulk17/undercover-game", live="https://undercover-game-client.vercel.app/", live_label="Play it"),
-    dict(letter="E", title="Band-Former", subtitle="Song in, playable guitar tab out",
-         facts=["Python ML stages isolate the guitar with HTDemucs, track the beat and transcribe the notes.",
-                "A C++ engine maps notes to frets, classifies chords from chroma features and picks a consistent fingering with a minimax-Viterbi search.",
-                "Paste a YouTube link or upload a file in the web app. Runs on Linux, Windows and macOS."],
-         chips=["Python", "PyTorch", "C++17", "FastAPI"], sch=sch_tab,
+    dict(letter="E", title="Band-Former", subtitle="Turns a song into guitar tabs",
+         facts=["Paste a YouTube link and get a playable guitar tab back.",
+                "AI models separate the guitar from the rest of the song and pick out the notes.",
+                "A fast C++ engine then works out a comfortable way to play them on a real guitar."],
+         chips=["Python", "PyTorch", "C++17"], sch=sch_tab,
          repo="https://github.com/pulk17/Band-Former", live=None, live_label=None),
 ]
 
@@ -404,7 +403,7 @@ PROJECTS = [
 PARTS = [
     [("Languages", [("C++17/20", "AE"), ("Go", "C"), ("Python", "BE"), ("TypeScript and JavaScript", "ABCD"), ("SQL", "BC"), ("Bash", "AB")]),
      ("Systems and performance", [("Linux", "A"), ("Benchmarking and profiling", "A"), ("WebAssembly", "A")]),
-     ("AI and ML", [("PyTorch", "E"), ("MCP and LLM tool calling", "C")])],
+     ("AI and ML", [("PyTorch", "E"), ("AI agents and Claude Code", "C")])],
     [("Backend and web", [("REST APIs and OpenAPI", "B"), ("Flask and FastAPI", "BE"), ("Gin", "C"), ("Express and Socket.IO", "D"), ("React", "BD"), ("Next.js", "C")]),
      ("Data", [("MySQL", "B"), ("PostgreSQL", "C"), ("Redis", "D")]),
      ("Infrastructure", [("Docker", "BCE"), ("Kubernetes and Helm", "C")])],
@@ -460,8 +459,9 @@ def readme():
     out = []
     out.append(picture("hero", "Pulkit Chauhan: final-year CS student who builds fast, tested systems in C++, Go, Python and TypeScript. Diagram of five systems and a title block of credentials."))
     out.append("")
-    out.append("I'm Pulkit, a final-year CS student at UPES Dehradun. I like building the layer between raw data and the people who use it, "
-               "and I try to put a measurement next to every claim. I'm looking for software engineering roles starting January 2027.")
+    out.append("I'm Pulkit, a final-year Computer Science student at UPES Dehradun, graduating in May 2027. "
+               "I build software that is fast, carefully tested, and backed by real numbers. "
+               "I'm looking for software engineering roles starting January 2027.")
     out.append("")
     out.append("## Things I've built")
     out.append("")
@@ -478,12 +478,12 @@ def readme():
     out.append("")
     out.append(picture("skills", "Skills table: each skill lists the projects above that use it."))
     out.append("")
-    out.append("## How I work")
+    out.append("## What I bring")
     out.append("")
-    out.append("- **I measure before I optimise.** PitchFork's README lists every optimisation with its measured speed-up, plus the ones that didn't help, like io_uring and profile-guided optimisation.")
-    out.append("- **I report results I don't like.** My order-flow signal is right 55% of the time and still loses money after costs. The write-up says so up front.")
-    out.append("- **I test the edges.** sample-platform's API ships with 330+ tests for things like revoked tokens and two uploads with the same name.")
-    out.append("- **I keep a human in the loop for AI.** k8n's agents can only propose changes, and every write is a dry run unless you say otherwise.")
+    out.append("- **Speed I can prove.** My exchange replay engine handles about 460 million updates in under a minute.")
+    out.append("- **Code others trust.** 34 changes reviewed and merged by CCExtractor's maintainers, backed by 330+ automated tests.")
+    out.append("- **Strong problem solving.** Candidate Master on Codeforces, with a peak rating of 1986.")
+    out.append("- **Careful use of AI.** In k8n, AI suggests changes and a person approves them before anything happens.")
     out.append("")
     out.append("## Get in touch")
     out.append("")
