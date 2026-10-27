@@ -1,0 +1,38 @@
+# Open-source contributions shown in README.md.
+# scripts/contrib.py reads this file and rewrites the block between
+#   <!-- contrib:start --> and <!-- contrib:end -->
+# It never edits this file. Clicks on the "Run workflow" button
+# (hide / unhide / approve) are saved to contrib.state.json instead.
+
+user: pulk17
+
+# Closed PRs that never merged are left out.
+hide_closed_unmerged: true
+
+# Accounts whose repos never appear (college lab-submission repos and similar).
+hidden_owners:
+  - hkshitesh
+  - Yashchaudhary0809
+
+# Approved repos, grouped into the projects shown as table rows.
+# A PR in any repo not listed here waits in contrib.state.json -> pending
+# until you approve it with the workflow button.
+projects:
+  - name: OpenCV
+    repos: [opencv/opencv]
+  - name: Boost.Geometry
+    repos: [boostorg/geometry]
+  - name: CCExtractor
+    repos: [CCExtractor/sample-platform, CCExtractor/ccextractor]
+    summary: "Google Summer of Code 2026: built sample-platform's REST API and the web console on top of it"
+  - name: ClickHouse
+    repos: [ClickHouse/ClickHouse, ClickHouse/boost]
+  - name: Microsoft STL
+    repos: [microsoft/STL]
+
+# Optional nicer wording for individual PRs. Keys are PR links.
+titles:
+  https://github.com/opencv/opencv/pull/30363: Fix getRectSubPix for windows that cross the image border
+  https://github.com/boostorg/geometry/pull/1499: Fix the quadrant of sin_cos_degrees for angles below −45°
+  https://github.com/ClickHouse/boost/pull/53: Fix the quadrant of sin_cos_degrees for negative angles
+  https://github.com/ClickHouse/boost/pull/54: Use Newton's method in karney_inverse without the reduced length

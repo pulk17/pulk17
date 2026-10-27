@@ -1,0 +1,60 @@
+name: Open-source contributions
+
+# Refreshes the "Open source" table in README.md.
+# Runs every 6 hours, or on demand from Actions -> this workflow -> Run workflow,
+# where you can also hide / unhide a PR or approve a new repo.
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      action:
+        description: What to do
+        type: choice
+        options: [refresh, hide, unhide, approve]
+        default: refresh
+      target:
+        description: PR link (hide/unhide), or owner/repo (approve, or hide a whole repo)
+        required: false
+      name:
+        description: Name to show when approving a repo (optional)
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: contrib
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml==6.0.2
+
+      - name: Rebuild the table
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACTION: ${{ inputs.action || 'refresh' }}
+          TARGET: ${{ inputs.target }}
+          NAME: ${{ inputs.name }}
+        run: python scripts/contrib.py --action "$ACTION" --target "$TARGET" --name "$NAME"
+
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet -- README.md contrib.state.json && [ -z "$(git ls-files --others --exclude-standard contrib.state.json)" ]; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md contrib.state.json
+          git commit -m "Update open-source contributions"
+          git push
