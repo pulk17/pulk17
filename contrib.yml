@@ -15,20 +15,21 @@ hidden_owners:
   - Yashchaudhary0809
 
 # Approved repos, grouped into the projects shown as table rows.
-# A PR in any repo not listed here waits in contrib.state.json -> pending
-# until you approve it with the workflow button.
+# Rows appear in the order listed here. A PR in any repo not listed here waits
+# in contrib.state.json -> pending until you approve it with the workflow button;
+# approved repos then show after these.
 projects:
+  - name: ClickHouse
+    repos: [ClickHouse/ClickHouse, ClickHouse/boost]
   - name: OpenCV
     repos: [opencv/opencv]
-  - name: Boost.Geometry
-    repos: [boostorg/geometry]
+  - name: Microsoft STL
+    repos: [microsoft/STL]
   - name: CCExtractor
     repos: [CCExtractor/sample-platform, CCExtractor/ccextractor]
     summary: "Google Summer of Code 2026: built sample-platform's REST API and the web console on top of it"
-  - name: ClickHouse
-    repos: [ClickHouse/ClickHouse, ClickHouse/boost]
-  - name: Microsoft STL
-    repos: [microsoft/STL]
+  - name: Boost.Geometry
+    repos: [boostorg/geometry]
 
 # Optional nicer wording for individual PRs. Keys are PR links.
 titles:

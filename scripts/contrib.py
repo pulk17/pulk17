@@ -181,7 +181,7 @@ def render(user, projects, stars):
         p["open"] = sum(x["status"] == "open" for x in p["prs"])
         p["prs"].sort(key=lambda x: x["when"], reverse=True)   # newest first,
         p["prs"].sort(key=lambda x: x["status"] != "merged")   # merged ones on top
-    projects.sort(key=lambda p: (p["merged"] == 0, -p["stars"]))
+    # Rows keep the order of contrib.yml (projects were built in that order).
 
     # A project counts as "merged into" only if a PR landed in its main repo
     # (the first one listed); otherwise the sentence names the exact repo.

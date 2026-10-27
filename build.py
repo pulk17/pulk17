@@ -127,8 +127,8 @@ HERO_FACTS = [
     ("GSoC 2026", "Google Summer of Code", "with CCExtractor"),
 ]
 # Projects drawn as branches merging into main: (row in the Open source table, label).
-HERO_BRANCHES = [("CCExtractor", "CCExtractor"), ("ClickHouse", "ClickHouse"),
-                 ("Boost.Geometry", "Boost"), ("Microsoft STL", "Microsoft STL")]
+HERO_BRANCHES = [("ClickHouse", "ClickHouse"), ("Microsoft STL", "Microsoft STL"),
+                 ("CCExtractor", "CCExtractor"), ("Boost.Geometry", "Boost")]
 SUMMARY = os.path.join(OUT, "contrib.summary.json")  # written by scripts/contrib.py
 
 
