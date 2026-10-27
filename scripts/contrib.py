@@ -276,6 +276,10 @@ def main():
         stars = fetch_stars(shown)
 
     changed = write_readme(render(cfg["user"], projects, stars), a.readme)
+    # Per-project counts for the hero image (build.py draws a dot per project).
+    with open(os.path.join(ROOT, "contrib.summary.json"), "w") as f:
+        json.dump({p["name"]: {"merged": p["merged"], "open": p["open"]} for p in projects}, f, indent=2, sort_keys=True)
+        f.write("\n")
     save_state(state)
     total = sum(len(p["prs"]) for p in projects)
     print(f"{total} PRs across {len(projects)} projects shown; README {'updated' if changed else 'unchanged'}.")

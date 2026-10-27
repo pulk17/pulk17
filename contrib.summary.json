@@ -1,0 +1,22 @@
+{
+  "Boost.Geometry": {
+    "merged": 0,
+    "open": 1
+  },
+  "CCExtractor": {
+    "merged": 21,
+    "open": 1
+  },
+  "ClickHouse": {
+    "merged": 1,
+    "open": 5
+  },
+  "Microsoft STL": {
+    "merged": 0,
+    "open": 1
+  },
+  "OpenCV": {
+    "merged": 1,
+    "open": 0
+  }
+}

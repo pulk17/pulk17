@@ -17,6 +17,7 @@ between <!-- contrib:start --> and <!-- contrib:end -->, and this script keeps
 whatever is there.
 """
 import html
+import json
 import math
 import os
 
@@ -121,70 +122,101 @@ def chips(s, x, y, items):
 
 # ------------------------------------------------------------------ hero
 HERO_FACTS = [
-    ("8.9M", "messages a second,", "NASDAQ order book engine"),
-    ("OpenCV", "C++ fix merged;", "ClickHouse PRs in review"),
+    ("Upstream C++", "PRs to ClickHouse, Boost", "and Microsoft STL"),
     ("1986", "peak Codeforces rating,", "Candidate Master"),
     ("GSoC 2026", "Google Summer of Code", "with CCExtractor"),
 ]
-HERO_ALT = ("Pulkit Chauhan. C++ systems engineer: order books, databases and open source. "
-            "Final-year computer science student at UPES, graduating May 2027, open to software engineering roles "
-            "from January 2027. 8.9 million messages a second through his NASDAQ order book engine. "
-            "A C++ fix merged into OpenCV, with more work in review at ClickHouse. Peak Codeforces rating 1986, "
-            "Candidate Master. Google Summer of Code 2026 with CCExtractor.")
+# Projects drawn as branches merging into main: (row in the Open source table, label).
+HERO_BRANCHES = [("CCExtractor", "CCExtractor"), ("ClickHouse", "ClickHouse"),
+                 ("Boost.Geometry", "Boost"), ("Microsoft STL", "Microsoft STL")]
+SUMMARY = os.path.join(OUT, "contrib.summary.json")  # written by scripts/contrib.py
 
 
-def ladder(s, x0, y0):
-    """A small live order book: asks above the spread, bids below.
-    Bids are filled with the accent, asks are outlines. Bar lengths drift
-    a little, like a book while the tape replays."""
+def branch_status():
+    """{name: (merged, open)} from the last contrib.py run, so the dots stay true."""
+    if not os.path.exists(SUMMARY):
+        return {}
+    with open(SUMMARY) as f:
+        return {k: (v["merged"], v["open"]) for k, v in json.load(f).items()}
+
+
+def status_words(merged, open_):
+    parts = ([f"{merged} merged"] if merged else []) + ([f"{open_} in review"] if open_ else [])
+    return ", ".join(parts)
+
+
+def hero_alt(st):
+    rows = []
+    for key, label in HERO_BRANCHES:
+        m, o = st.get(key, (0, 0))
+        rows.append(f"{label} ({status_words(m, o)})" if (m or o) else label)
+    return ("Pulkit Chauhan. C++ systems engineer who contributes to databases and core C++ libraries. "
+            "Final-year computer science student at UPES, open to software engineering roles from January 2027. "
+            "Open-source work drawn as branches merging into main: " + "; ".join(rows) + ". "
+            "Upstream C++ PRs to ClickHouse, Boost and Microsoft STL. Peak Codeforces rating 1986, Candidate Master. "
+            "Google Summer of Code 2026 with CCExtractor.")
+
+
+def merge_lines(s, st, x0, y0):
+    """Each project is a branch. A filled dot means work merged there, a hollow
+    one means it's in review. Merged branches send a pulse into main."""
     P = s.P
-    asks = [(145.69, 0.48), (145.68, 0.74), (145.67, 0.40), (145.66, 0.62), (145.65, 0.30)]
-    bids = [(145.64, 0.56), (145.63, 0.90), (145.62, 0.66), (145.61, 0.82), (145.60, 0.44)]
-    row, gap, bx, bw = 15, 4, x0 + 54, 176
-    s.css.append(
-        ".lv{transform-box:fill-box;transform-origin:left center;animation:dr var(--d) ease-in-out infinite alternate}"
-        "@keyframes dr{from{transform:scaleX(1)}to{transform:scaleX(var(--s))}}"
-        ".tp{animation:tp 4.2s ease-in-out infinite}"
-        "@keyframes tp{0%,70%,100%{opacity:1}80%{opacity:.35}}"
-        "@media (prefers-reduced-motion:reduce){.lv,.tp{animation:none}}")
-    drift = [(5.2, .82), (3.7, 1.12), (6.1, .9), (4.4, 1.08), (3.1, .7)]
-    y = y0
-    for i, (px, q) in enumerate(asks):
-        s.text(x0, y + 11, f"{px:.2f}", "mono", 11, P["sub"])
-        d, sc = drift[i]
-        cls = "lv" + (" tp" if i == len(asks) - 1 else "")
-        s.add(f'<rect class="{cls}" style="--d:{d}s;--s:{sc}" x="{bx}" y="{y + 1}" width="{bw * q:.1f}" height="{row - 2}" '
-              f'rx="1.5" fill="none" stroke="{P["sub"]}" stroke-width="1"/>')
-        y += row + gap
-    # the spread
-    s.add(f'<line x1="{bx}" y1="{y + 1.5}" x2="{bx + bw}" y2="{y + 1.5}" stroke="{P["faint"]}" stroke-width="1" stroke-dasharray="2 3"/>')
-    y += 8
-    for i, (px, q) in enumerate(bids):
-        s.text(x0, y + 11, f"{px:.2f}", "mono", 11, P["sub"])
-        d, sc = drift[(i + 2) % 5]
-        cls = "lv" + (" tp" if i == 0 else "")
-        op = 1 - i * 0.13
-        s.add(f'<rect class="{cls}" style="--d:{d}s;--s:{sc}" x="{bx}" y="{y}" width="{bw * q:.1f}" height="{row - 1}" '
-              f'rx="1.5" fill="{P["acc"]}" fill-opacity="{op:.2f}"/>')
-        y += row + gap
-    return y
+    trunk, start, node, end = W - 70, x0 + 118, x0 + 148, W
+    rows = [y0 + 22 + i * 38 for i in range(len(HERO_BRANCHES))]
+    main_y = rows[-1] + 62
+    s.css.append(".pulse{opacity:0}@media (prefers-reduced-motion:reduce){.pulse{display:none}}")
+
+    def route(y):  # branch -> trunk -> main, one path so a pulse can ride it end to end
+        return (f"M{start},{y} H{trunk - 26} Q{trunk},{y} {trunk},{y + 26} "
+                f"V{main_y - 26} Q{trunk},{main_y} {trunk + 26},{main_y} H{end}")
+
+    # trunk and main
+    s.add(f'<path d="M{trunk},{rows[0] + 26} V{main_y - 26} Q{trunk},{main_y} {trunk + 26},{main_y} H{end}" '
+          f'fill="none" stroke="{P["ink"]}" stroke-width="1.4"/>')
+    s.text(end, main_y - 9, "main", "m", 11, P["sub"], anchor="end")
+    for i, ((key, label), y) in enumerate(zip(HERO_BRANCHES, rows)):
+        m, o = st.get(key, (0, 0))
+        s.text(x0, y + 1, label, "m", 13, P["ink"])
+        words = status_words(m, o)
+        if words:
+            s.text(x0, y + 16, words, "r", 11, P["sub"])
+        s.add(f'<path d="M{start},{y} H{node - 6}" stroke="{P["sub"]}" stroke-width="1"/>'
+              f'<path d="M{node + 6},{y} H{trunk - 26} Q{trunk},{y} {trunk},{y + 26}" fill="none" stroke="{P["sub"]}" stroke-width="1"/>')
+        if m:
+            s.add(f'<circle cx="{node}" cy="{y}" r="4.5" fill="{P["acc"]}"/>')
+            s.add(f'<circle class="pulse" r="2.6" fill="{P["acc"]}">'
+                  f'<animateMotion dur="3.4s" begin="{i * 1.1:.1f}s" repeatCount="indefinite" path="{route(y)}"/>'
+                  f'<animate attributeName="opacity" dur="3.4s" begin="{i * 1.1:.1f}s" repeatCount="indefinite" '
+                  f'values="0;1;1;0" keyTimes="0;0.1;0.85;1"/></circle>')
+        else:
+            s.add(f'<circle cx="{node}" cy="{y}" r="4" fill="none" stroke="{P["acc"]}" stroke-width="1.3"/>')
+    # legend
+    ly = main_y + 4
+    s.add(f'<circle cx="{x0 + 4}" cy="{ly - 4}" r="3.5" fill="{P["acc"]}"/>')
+    w = s.text(x0 + 13, ly, "merged", "r", 11, P["sub"])
+    lx = x0 + 13 + w + 16
+    s.add(f'<circle cx="{lx + 4}" cy="{ly - 4}" r="3.2" fill="none" stroke="{P["acc"]}" stroke-width="1.2"/>')
+    s.text(lx + 13, ly, "in review", "r", 11, P["sub"])
+    return main_y
 
 
 def hero(theme):
-    s = Svg(318, "Pulkit Chauhan", HERO_ALT, theme)
+    st = branch_status()
+    s = Svg(330, "Pulkit Chauhan", hero_alt(st), theme)
     P = s.P
     s.text(0, 52, "Pulkit Chauhan", "b", 44, P["ink"], ls=-1.3)
-    y = s.para(0, 92, "C++ systems engineer. Order books, databases and open source.", "r", 19, P["ink"], 380, 26)
-    y = s.para(0, y + 36, "Final-year computer science student at UPES, graduating May 2027. "
-                          "Open to software engineering roles from January 2027.", "r", 14, P["sub"], 360, 21)
-    ladder(s, 478, 6)
-    s.add(f'<line x1="0" y1="222" x2="{W}" y2="222" stroke="{P["faint"]}" stroke-width="1"/>')
-    col = W / 4
+    y = s.para(0, 92, "C++ systems engineer. I contribute to databases and core C++ libraries.",
+               "r", 19, P["ink"], 360, 26)
+    s.para(0, y + 36, "Final-year computer science student at UPES. "
+                      "Open to software engineering roles from January 2027.", "r", 14, P["sub"], 385, 21)
+    merge_lines(s, st, 430, 8)
+    s.add(f'<line x1="0" y1="234" x2="{W}" y2="234" stroke="{P["faint"]}" stroke-width="1"/>')
+    col = W / 3
     for i, (fig, l1, l2) in enumerate(HERO_FACTS):
         x = i * col
-        s.text(x, 262, fig, "b", 24, P["ink"], ls=-0.5)
-        s.text(x, 286, l1, "r", 12.5, P["sub"])
-        s.text(x, 304, l2, "r", 12.5, P["sub"])
+        s.text(x, 274, fig, "b", 24, P["ink"], ls=-0.5)
+        s.text(x, 298, l1, "r", 12.5, P["sub"])
+        s.text(x, 316, l2, "r", 12.5, P["sub"])
     return s.render()
 
 
@@ -344,7 +376,7 @@ def picture(name, alt, href=None):
 
 
 def readme(contrib_block):
-    parts = [picture("hero", HERO_ALT), "", "## Open source", "", contrib_block, "", "## Projects", ""]
+    parts = [picture("hero", hero_alt(branch_status())), "", "## Open source", "", contrib_block, "", "## Projects", ""]
     for key, c in CARDS.items():
         parts += [picture(key, c["alt"], LINKS[key][0][1]), "",
                   "&emsp;".join(f"[{t}]({u})" for t, u in LINKS[key]), "", ""]

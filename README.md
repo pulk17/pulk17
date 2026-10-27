@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/hero-dark.svg">
-  <img alt="Pulkit Chauhan. C++ systems engineer: order books, databases and open source. Final-year computer science student at UPES, graduating May 2027, open to software engineering roles from January 2027. 8.9 million messages a second through his NASDAQ order book engine. A C++ fix merged into OpenCV, with more work in review at ClickHouse. Peak Codeforces rating 1986, Candidate Master. Google Summer of Code 2026 with CCExtractor." src="./assets/hero-light.svg" width="100%">
+  <img alt="Pulkit Chauhan. C++ systems engineer who contributes to databases and core C++ libraries. Final-year computer science student at UPES, open to software engineering roles from January 2027. Open-source work drawn as branches merging into main: CCExtractor (21 merged, 1 in review); ClickHouse (1 merged, 5 in review); Boost (1 in review); Microsoft STL (1 in review). Upstream C++ PRs to ClickHouse, Boost and Microsoft STL. Peak Codeforces rating 1986, Candidate Master. Google Summer of Code 2026 with CCExtractor." src="./assets/hero-light.svg" width="100%">
 </picture>
 
 ## Open source
