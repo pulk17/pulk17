@@ -1,12 +1,12 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/hero-dark.svg">
-  <img alt="Pulkit Chauhan. C++ systems engineer who contributes to databases and core C++ libraries. Final-year computer science student at UPES, open to software engineering roles from January 2027. Open-source work drawn as branches merging into main: ClickHouse (3 merged, 3 in review); Microsoft STL (1 in review); CCExtractor (22 merged); Boost (1 in review). Upstream C++ PRs to ClickHouse, Boost and Microsoft STL. Peak Codeforces rating 1986, Candidate Master. Google Summer of Code 2026 with CCExtractor." src="./assets/hero-light.svg" width="100%">
+  <img alt="Pulkit Chauhan. C++ systems engineer who contributes to databases and core C++ libraries. Final-year computer science student at UPES, open to software engineering roles from January 2027. Open-source work drawn as branches merging into main: ClickHouse (3 merged, 3 in review); Microsoft STL (1 in review); CCExtractor (22 merged); Boost. Upstream C++ PRs to ClickHouse, Boost and Microsoft STL. Peak Codeforces rating 1986, Candidate Master. Google Summer of Code 2026 with CCExtractor." src="./assets/hero-light.svg" width="100%">
 </picture>
 
 ## Open source
 
 <!-- contrib:start -->
-Merged into ClickHouse, OpenCV and CCExtractor. In review at Microsoft STL and Boost.Geometry.
+Merged into ClickHouse, OpenCV and CCExtractor. In review at Microsoft STL.
 
 | Project | Contributions |
 | :-- | :-- |
@@ -14,7 +14,6 @@ Merged into ClickHouse, OpenCV and CCExtractor. In review at Microsoft STL and B
 | **[OpenCV](https://github.com/opencv/opencv)**<br><sub>91.4k stars</sub> | ✓ [Fix getRectSubPix for windows that cross the image border](https://github.com/opencv/opencv/pull/30363) |
 | **[Microsoft STL](https://github.com/microsoft/STL)**<br><sub>11.2k stars</sub> | ○ [Add tests for LWG-4267 Uses-allocator construction is meaningless for tuple of references](https://github.com/microsoft/STL/pull/6494) |
 | **[CCExtractor](https://github.com/CCExtractor/sample-platform)**<br><sub>31 stars</sub> | Google Summer of Code 2026: built sample-platform's REST API and the web console on top of it<br><sub>22 merged&ensp;[sample-platform](https://github.com/CCExtractor/sample-platform/pulls?q=is%3Apr+author%3Apulk17)</sub> |
-| **[Boost.Geometry](https://github.com/boostorg/geometry)**<br><sub>518 stars</sub> | ○ [Fix the quadrant of sin_cos_degrees for angles below −45°](https://github.com/boostorg/geometry/pull/1499) |
 
 <sub>✓ merged&emsp;○ in review&emsp;Kept up to date from GitHub by a scheduled workflow. Latest activity 1 Nov 2026.</sub>
 <!-- contrib:end -->
