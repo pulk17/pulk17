@@ -1,6 +1,6 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/hero-dark.svg">
-  <img alt="Pulkit Chauhan. C++ systems engineer who contributes to databases and core C++ libraries. Final-year computer science student at UPES, open to software engineering roles from January 2027. Open-source work drawn as branches merging into main: ClickHouse (4 merged, 2 in review); Microsoft STL (1 in review); CCExtractor (22 merged); Boost. Upstream C++ PRs to ClickHouse, Boost and Microsoft STL. Peak Codeforces rating 1986, Candidate Master. Google Summer of Code 2026 with CCExtractor." src="./assets/hero-light.svg" width="100%">
+  <img alt="Pulkit Chauhan. C++ systems engineer who contributes to databases and core C++ libraries. Final-year computer science student at UPES, open to software engineering roles from January 2027. Open-source work drawn as branches merging into main: ClickHouse (4 merged, 3 in review); Microsoft STL (1 in review); CCExtractor (22 merged); Boost. Upstream C++ PRs to ClickHouse, Boost and Microsoft STL. Peak Codeforces rating 1986, Candidate Master. Google Summer of Code 2026 with CCExtractor." src="./assets/hero-light.svg" width="100%">
 </picture>
 
 ## Open source
@@ -10,8 +10,8 @@ Merged into ClickHouse, OpenCV and CCExtractor. In review at Microsoft STL.
 
 | Project | Contributions |
 | :-- | :-- |
-| **[ClickHouse](https://github.com/ClickHouse/ClickHouse)**<br><sub>50.7k stars</sub> | ✓ [Add polygonMinimumRotatedRectangleCartesian, exteriorRing, interiorRingN and pointN](https://github.com/ClickHouse/ClickHouse/pull/127944)<br>✓ [Accept `_` and non-ASCII letters in regexp group names](https://github.com/ClickHouse/ClickHouse/pull/126346)<br>✓ [Add lengthCartesian, lengthSpherical and lengthSpheroid functions](https://github.com/ClickHouse/ClickHouse/pull/127764)<br>✓ boost: [Fix the quadrant of sin_cos_degrees for negative angles](https://github.com/ClickHouse/boost/pull/53)<br><sub>[+2 more](https://github.com/ClickHouse/ClickHouse/pulls?q=is%3Apr+author%3Apulk17)</sub> |
-| **[OpenCV](https://github.com/opencv/opencv)**<br><sub>91.4k stars</sub> | ✓ [Fix getRectSubPix for windows that cross the image border](https://github.com/opencv/opencv/pull/30363) |
+| **[ClickHouse](https://github.com/ClickHouse/ClickHouse)**<br><sub>50.7k stars</sub> | ✓ [Add polygonMinimumRotatedRectangleCartesian, exteriorRing, interiorRingN and pointN](https://github.com/ClickHouse/ClickHouse/pull/127944)<br>✓ [Accept `_` and non-ASCII letters in regexp group names](https://github.com/ClickHouse/ClickHouse/pull/126346)<br>✓ [Add lengthCartesian, lengthSpherical and lengthSpheroid functions](https://github.com/ClickHouse/ClickHouse/pull/127764)<br>✓ boost: [Fix the quadrant of sin_cos_degrees for negative angles](https://github.com/ClickHouse/boost/pull/53)<br><sub>[+3 more](https://github.com/ClickHouse/ClickHouse/pulls?q=is%3Apr+author%3Apulk17)</sub> |
+| **[OpenCV](https://github.com/opencv/opencv)**<br><sub>91.5k stars</sub> | ✓ [Fix getRectSubPix for windows that cross the image border](https://github.com/opencv/opencv/pull/30363) |
 | **[Microsoft STL](https://github.com/microsoft/STL)**<br><sub>11.2k stars</sub> | ○ [Add tests for LWG-4267 Uses-allocator construction is meaningless for tuple of references](https://github.com/microsoft/STL/pull/6494) |
 | **[CCExtractor](https://github.com/CCExtractor/sample-platform)**<br><sub>31 stars</sub> | Google Summer of Code 2026: built sample-platform's REST API and the web console on top of it<br><sub>22 merged&ensp;[sample-platform](https://github.com/CCExtractor/sample-platform/pulls?q=is%3Apr+author%3Apulk17)</sub> |
 
